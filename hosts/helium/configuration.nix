@@ -1,8 +1,10 @@
+# wsl configuration for prototyping. Doesn't need hardware-configuration.nix
+
 { config, pkgs, ... }:
 
 {
   imports = [
-    ./hardware-configuration.nix
+    <nixos-wsl/modules>
     ../../modules/common.nix
     ../../modules/users.nix
     ../../modules/networking.nix
@@ -11,15 +13,13 @@
     ../../modules/services/ssh.nix
   ];
 
-  # Host-specific configuration
-  networking.hostName = "hydrogen";
-
-  # Boot loader configuration (host-specific)
-  boot.loader.grub = {
+  wsl = {
     enable = true;
-    device = "/dev/sda";
-    useOSProber = true;
+    defaultUser = "davide";
   };
+
+  # Host-specific configuration
+  networking.hostName = "helium";
 
   # Any host-specific overrides or additional configuration can go here
 }
