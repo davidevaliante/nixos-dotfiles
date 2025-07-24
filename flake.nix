@@ -6,11 +6,13 @@
   };
 
   outputs = { self, nixpkgs, ... }@inputs: {
-    nixosConfigurations.hydrogen = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      modules = [
-        ./configuration.nix
-      ];
+    nixosConfigurations = {
+      hydrogen = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ./hosts/hydrogen/configuration.nix
+        ];
+      };
     };
   };
 }
