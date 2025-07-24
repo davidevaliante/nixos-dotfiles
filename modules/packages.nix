@@ -6,6 +6,10 @@
     # Version control
     git
 
+    # archives
+    zip
+    unzip
+
     # Text editors
     neovim
 
@@ -15,6 +19,12 @@
     curl
     tree
     which
+
+    # utils
+    eza
+    fzf
+    ripgrep
+    jq
   ];
 }
 
