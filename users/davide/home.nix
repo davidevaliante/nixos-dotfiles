@@ -6,6 +6,8 @@
     ./modules/git.nix
     ./modules/shell.nix
     ./modules/development.nix
+    ./modules/wezterm.nix
+    ./modules/starship.nix
   ];
 
   home.username = "davide";
