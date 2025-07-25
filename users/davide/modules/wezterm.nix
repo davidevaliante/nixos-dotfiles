@@ -26,6 +26,7 @@
       config.tab_bar_at_bottom = true
       config.use_fancy_tab_bar = false
       config.hide_tab_bar_if_only_one_tab = true
+      config.enable_wayland = true
 
       config.colors = {
         -- bright green
