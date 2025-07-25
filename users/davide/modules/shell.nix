@@ -77,7 +77,7 @@
 
         # Bash completion for terraform
         autoload -U +X bashcompinit && bashcompinit
-        complete -o nospace -C ${pkgs.terraform}/bin/terraform terraform
+        complete -o nospace -C terraform terraform
 
         # Homebrew
         eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"

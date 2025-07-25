@@ -3,7 +3,7 @@
 {
   programs.wezterm = {
     enable = true;
-    extraConfig = ''
+    extraConfig = /* lua */ ''
       -- Pull in the wezterm API
       local wezterm = require("wezterm")
       local act = wezterm.action
@@ -69,8 +69,6 @@
         inactive_titlebar_bg = "#ed1cab",
         font_size = 14.0,
       }
-      -- On WSL it starts the term into ubuntu by default
-      config.default_domain = "WSL:Ubuntu-24.04"
 
       -- FONTS RENDERING
       -- font is available at https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/SourceCodePro.zip (Select the bold font)
@@ -123,3 +121,4 @@
     '';
   };
 }
+

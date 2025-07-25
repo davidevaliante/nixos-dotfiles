@@ -8,6 +8,7 @@
     ./modules/development.nix
     ./modules/wezterm.nix
     ./modules/starship.nix
+    ./modules/programming_languages.nix
   ];
 
   home.username = "davide";
