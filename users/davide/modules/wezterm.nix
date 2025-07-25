@@ -64,12 +64,11 @@
       -- config.win32_system_backdrop = 'Tabbed'
       -- config.win32_system_backdrop = 'Acrylic'
 
-      -- Window frame configuration (only needed if decorations are enabled)
-      -- config.window_frame = {
-      --   active_titlebar_bg = "#ed1cab",
-      --   inactive_titlebar_bg = "#ed1cab",
-      --   font_size = 14.0,
-      -- }
+      config.window_frame = {
+        active_titlebar_bg = "#ed1cab",
+        inactive_titlebar_bg = "#ed1cab",
+        font_size = 14.0,
+      }
 
       -- FONTS RENDERING
       -- font is available at https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/SourceCodePro.zip (Select the bold font)
@@ -84,14 +83,19 @@
 
       -- disables the bell
       config.audible_bell = "Disabled"
-      
-      -- Remove title bar completely
-      config.window_decorations = "RESIZE"
+      config.window_frame = {
+        font = wezterm.font({ family = "0xProto Nerd Font Mono", weight = "Bold" }),
+        active_titlebar_bg = "#171B20",
+        inactive_titlebar_bg = "#171B20"
+        -- active_titlebar_bg = "#8b5cf6",
+      }
       config.skip_close_confirmation_for_processes_named = {
         "bash",
         "zsh",
         "fish",
       }
+      -- removes title bar
+      config.window_decorations = "RESIZE"
       -- style
       config.window_padding = {
         left = "8px",

@@ -36,6 +36,6 @@
     claude = "/home/davide/.claude/local/claude";
     
     # NixOS rebuild alias with automatic hostname detection
-    rebuild = "sudo nixos-rebuild switch --flake .#$(hostname)";
+    rebuild = "sudo /run/current-system/sw/bin/nixos-rebuild switch --flake .#$(hostname)";
   };
 }

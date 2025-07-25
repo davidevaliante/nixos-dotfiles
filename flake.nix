@@ -37,6 +37,9 @@
 
         # Default (currently VM)
         hydrogen = mkHost linux_64 "hydrogen-vm";
+        
+        # Helium configuration (current hostname)
+        helium = mkHost linux_64 "hydrogen";
       };
     };
 }
