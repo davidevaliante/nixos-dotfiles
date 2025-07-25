@@ -183,6 +183,13 @@
         "float, ^(org.gnome.Calculator)$"
       ];
 
+      # Window rules v2 (newer syntax)
+      windowrulev2 = [
+        # Disable client-side decorations (title bars) for specific applications
+        "suppressevent maximize, class:.*"
+        "suppressevent activate, class:.*"
+      ];
+
       # Layer rules
       layerrule = [
         "blur, waybar"
