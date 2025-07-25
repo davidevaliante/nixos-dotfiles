@@ -34,5 +34,8 @@
     air = "~/go/bin/air";
     tofu = "tofu-command";
     claude = "/home/davide/.claude/local/claude";
+    
+    # NixOS rebuild alias with automatic hostname detection
+    rebuild = "sudo nixos-rebuild switch --flake .#$(hostname)";
   };
 }

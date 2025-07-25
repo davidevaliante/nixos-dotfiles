@@ -22,4 +22,17 @@
 
   # System state version
   system.stateVersion = "25.05";
+
+  # Allow davide to run nixos-rebuild without password
+  security.sudo.extraRules = [
+    {
+      users = [ "davide" ];
+      commands = [
+        {
+          command = "${pkgs.nixos-rebuild}/bin/nixos-rebuild";
+          options = [ "NOPASSWD" ];
+        }
+      ];
+    }
+  ];
 }

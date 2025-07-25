@@ -7,9 +7,7 @@
     settings = {
       # Monitor configuration with scaling
       monitor = [
-        # Adjust these based on your setup - try 1.0 for normal scaling
-        ",preferred,auto,1.0"  # 1.0x scaling (normal size)
-        # For specific monitors: "DP-1,1920x1080@60,0x0,1"
+        ",preferred,auto,1.0"
       ];
 
       # Input configuration
@@ -19,7 +17,7 @@
         touchpad = {
           natural_scroll = false;
         };
-        sensitivity = 0; # -1.0 - 1.0, 0 means no modification
+        sensitivity = 0;
       };
 
       # General settings
@@ -95,8 +93,8 @@
         "$mainMod, E, exec, nautilus"
         "$mainMod, V, togglefloating,"
         "$mainMod, R, exec, rofi -show drun"
-        "$mainMod, P, pseudo, # dwindle"
-        "$mainMod, J, togglesplit, # dwindle"
+        "$mainMod, P, pseudo"
+        "$mainMod, J, togglesplit"
 
         # Window focus
         "$mainMod, left, movefocus, l"
