@@ -2,27 +2,26 @@
 
 {
   imports = [
-    ./hardware-configuration.nix
+    ../hydrogen/hardware-configuration.nix  # You'll need to update this for your actual hardware
     ../../modules/common.nix
     ../../modules/users.nix
     ../../modules/networking.nix
     ../../modules/localization.nix
     ../../modules/packages.nix
     ../../modules/services/ssh.nix
-    ../../modules/services/nvidia.nix
-    ../../modules/services/hyprland-vm.nix
+    ../../modules/hardware/nvidia.nix
+    ../../modules/services/hyprland-unified.nix
   ];
 
   # Host-specific configuration
   networking.hostName = "hydrogen";
 
-  # Boot loader configuration (host-specific)
+  # Boot loader configuration for actual hardware
   boot.loader.grub = {
     enable = true;
-    device = "/dev/sda";
+    device = "/dev/sda";  # Update this for your actual device
     useOSProber = true;
   };
 
-  # Any host-specific overrides or additional configuration can go here
+  # NVIDIA-specific optimizations can go here
 }
-

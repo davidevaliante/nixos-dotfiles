@@ -1,6 +1,8 @@
 { config, pkgs, lib, ... }:
 
 {
+  # Unified Hyprland configuration that works for both VM and NVIDIA
+  
   # Enable Hyprland
   programs.hyprland = {
     enable = true;
@@ -32,46 +34,47 @@
   environment.systemPackages = with pkgs; [
     # Terminal emulators
     wezterm
-
+    foot  # Lightweight fallback terminal
+    
     # Notifications
     dunst
     libnotify
-
+    
     # Wallpaper
     hyprpaper
-
+    
     # App launcher
     rofi-wayland
-
+    
     # Status bar
     waybar
-
+    
     # Screenshot utility
     grimblast
-
+    
     # Screen recording
     wf-recorder
-
+    
     # Clipboard manager
     wl-clipboard
     cliphist
-
+    
     # Authentication agent
     polkit_gnome
-
+    
     # File manager
     nautilus
-
+    
     # System tray
     networkmanagerapplet
-
+    
     # Brightness control
     brightnessctl
-
+    
     # Audio control
     pavucontrol
     playerctl
-
+    
     # Lock screen
     swaylock-effects
   ];
@@ -100,14 +103,4 @@
       TimeoutStopSec = 10;
     };
   };
-
-  # Session variables
-  environment.sessionVariables = {
-    # Hint electron apps to use wayland
-    NIXOS_OZONE_WL = "1";
-
-    # GTK theme
-    GTK_USE_PORTAL = "1";
-  };
 }
-

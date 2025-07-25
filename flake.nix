@@ -29,14 +29,14 @@
     in
     {
       nixosConfigurations = {
-        # Existing host
-        hydrogen = mkHost linux_64 "hydrogen";
-
-        # Add new hosts here following the same pattern:
-        # hostname = mkHost "hostname" "system-architecture";
-        # Example:
-        # helium = mkHost "helium" "x86_64-linux";
-        # carbon = mkHost "carbon" "aarch64-linux";
+        # VM configuration
+        hydrogen-vm = mkHost linux_64 "hydrogen-vm";
+        
+        # NVIDIA configuration  
+        hydrogen-nvidia = mkHost linux_64 "hydrogen-nvidia";
+        
+        # Default (currently VM)
+        hydrogen = mkHost linux_64 "hydrogen-vm";
       };
     };
 }

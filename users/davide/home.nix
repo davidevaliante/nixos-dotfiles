@@ -9,7 +9,7 @@
     ./modules/wezterm.nix
     ./modules/starship.nix
     ./modules/programming_languages.nix
-    ./modules/hyprland.nix
+    ./modules/hyprland-unified.nix
   ];
 
   home.username = "davide";

@@ -2,15 +2,15 @@
 
 {
   imports = [
-    ./hardware-configuration.nix
+    ../hydrogen/hardware-configuration.nix  # Reuse the same hardware config
     ../../modules/common.nix
     ../../modules/users.nix
     ../../modules/networking.nix
     ../../modules/localization.nix
     ../../modules/packages.nix
     ../../modules/services/ssh.nix
-    ../../modules/services/nvidia.nix
-    ../../modules/services/hyprland-vm.nix
+    ../../modules/hardware/vm.nix
+    ../../modules/services/hyprland-unified.nix
   ];
 
   # Host-specific configuration
@@ -23,6 +23,7 @@
     useOSProber = true;
   };
 
-  # Any host-specific overrides or additional configuration can go here
+  # VM-specific optimizations
+  services.qemuGuest.enable = true;
+  services.spice-vdagentd.enable = true;
 }
-
