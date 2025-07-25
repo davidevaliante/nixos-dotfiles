@@ -10,7 +10,7 @@
     ../../modules/packages.nix
     ../../modules/services/ssh.nix
     ../../modules/services/nvidia.nix
-    ../../modules/services/hyprland-vm.nix
+    ../../modules/services/hyprland.nix
   ];
 
   # Host-specific configuration

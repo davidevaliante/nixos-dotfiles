@@ -1,6 +1,8 @@
 { config, pkgs, lib, ... }:
 
 {
+  # Unified Hyprland configuration that works for both VM and NVIDIA
+
   # Enable Hyprland
   programs.hyprland = {
     enable = true;
@@ -32,6 +34,7 @@
   environment.systemPackages = with pkgs; [
     # Terminal emulators
     wezterm
+    foot # Lightweight fallback terminal
 
     # Notifications
     dunst
@@ -101,7 +104,7 @@
     };
   };
 
-  # Session variables
+  # Common session variables
   environment.sessionVariables = {
     # Hint electron apps to use wayland
     NIXOS_OZONE_WL = "1";

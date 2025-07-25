@@ -10,7 +10,7 @@
     ../../modules/packages.nix
     ../../modules/services/ssh.nix
     ../../modules/hardware/vm.nix
-    ../../modules/services/hyprland-unified.nix
+    ../../modules/services/hyprland.nix
   ];
 
   # Host-specific configuration

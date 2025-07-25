@@ -31,10 +31,10 @@
       nixosConfigurations = {
         # VM configuration
         hydrogen-vm = mkHost linux_64 "hydrogen-vm";
-        
+
         # NVIDIA configuration  
         hydrogen-nvidia = mkHost linux_64 "hydrogen-nvidia";
-        
+
         # Default (currently VM)
         hydrogen = mkHost linux_64 "hydrogen-vm";
       };

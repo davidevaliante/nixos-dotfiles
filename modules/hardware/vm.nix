@@ -24,10 +24,6 @@
     # Use Mesa DRI backend
     GBM_BACKEND = "dri";
     __GLX_VENDOR_LIBRARY_NAME = "mesa";
-    
-    # Other Wayland optimizations
-    NIXOS_OZONE_WL = "1";
-    GTK_USE_PORTAL = "1";
   };
 
   # Additional packages for VM debugging

@@ -5,11 +5,9 @@
     ./modules/packages.nix
     ./modules/git.nix
     ./modules/shell.nix
-    ./modules/development.nix
     ./modules/wezterm.nix
     ./modules/starship.nix
     ./modules/programming_languages.nix
-    ./modules/hyprland-unified.nix
   ];
 
   home.username = "davide";
