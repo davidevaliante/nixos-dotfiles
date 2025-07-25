@@ -5,109 +5,215 @@
     enable = true;
     enableZshIntegration = true;
     settings = {
-      format = ''
-        [╭─](bold green)$username$hostname$directory$git_branch$git_status$cmd_duration
-        [╰─](bold green)$character
-      '';
-
-      username = {
-        show_always = true;
-        style_user = "bold blue";
-        style_root = "bold red";
-        format = "[$user]($style) ";
-      };
-
-      hostname = {
-        ssh_only = false;
-        format = "[@$hostname](bold yellow) ";
-        disabled = false;
-      };
-
-      directory = {
-        style = "bold cyan";
-        format = "[$path]($style) ";
-        truncation_length = 3;
-        truncate_to_repo = true;
-      };
-
-      git_branch = {
-        style = "bold purple";
-        format = "[$symbol$branch]($style) ";
-        symbol = " ";
-      };
-
-      git_status = {
-        style = "bold red";
-        format = "[$all_status$ahead_behind]($style) ";
-      };
-
-      cmd_duration = {
-        min_time = 500;
-        format = "[$duration](bold yellow) ";
-      };
-
       character = {
-        success_symbol = "[❯](bold green)";
-        error_symbol = "[❯](bold red)";
+        success_symbol = "[λ](bold green)";
       };
 
       aws = {
+        symbol = "  ";
         disabled = true;
       };
 
-      gcloud = {
-        disabled = true;
+      buf = {
+        symbol = " ";
       };
 
-      kubernetes = {
-        disabled = false;
-        format = "[$symbol$context( \\($namespace\\))]($style) ";
+      c = {
+        symbol = " ";
+      };
+
+      conda = {
+        symbol = " ";
+      };
+
+      crystal = {
+        symbol = " ";
+      };
+
+      dart = {
+        symbol = " ";
+      };
+
+      directory = {
+        read_only = " 󰌾";
       };
 
       docker_context = {
-        format = "[$symbol$context]($style) ";
-      };
-
-      python = {
-        format = "[$symbol$pyenv_prefix($version )(\\($virtualenv\\) )]($style)";
         symbol = " ";
       };
 
-      nodejs = {
-        format = "[$symbol($version )]($style)";
+      elixir = {
         symbol = " ";
       };
 
-      rust = {
-        format = "[$symbol($version )]($style)";
+      elm = {
+        symbol = " ";
+      };
+
+      fennel = {
+        symbol = " ";
+      };
+
+      fossil_branch = {
+        symbol = " ";
+      };
+
+      git_branch = {
         symbol = " ";
       };
 
       golang = {
-        format = "[$symbol($version )]($style)";
         symbol = " ";
       };
 
-      package = {
-        format = "[$symbol$version]($style) ";
+      guix_shell = {
+        symbol = " ";
       };
 
-      nix_shell = {
-        format = "[$symbol$state( \\($name\\))]($style) ";
+      haskell = {
+        symbol = " ";
+      };
+
+      haxe = {
+        symbol = " ";
+      };
+
+      hg_branch = {
+        symbol = " ";
+      };
+
+      hostname = {
+        ssh_symbol = " ";
+      };
+
+      java = {
+        symbol = " ";
+      };
+
+      julia = {
+        symbol = " ";
+      };
+
+      kotlin = {
+        symbol = " ";
+      };
+
+      lua = {
         symbol = " ";
       };
 
       memory_usage = {
-        disabled = false;
-        threshold = 80;
-        format = "[$symbol$ram_pct]($style) ";
+        symbol = "󰍛 ";
       };
 
-      time = {
-        disabled = false;
-        format = "[$time]($style) ";
-        time_format = "%H:%M";
+      meson = {
+        symbol = "󰔷 ";
+      };
+
+      nim = {
+        symbol = "󰆥 ";
+      };
+
+      nix_shell = {
+        symbol = " ";
+      };
+
+      nodejs = {
+        symbol = " ";
+      };
+
+      ocaml = {
+        symbol = " ";
+      };
+
+      os = {
+        symbols = {
+          Alpaquita = " ";
+          Alpine = " ";
+          Amazon = " ";
+          Android = " ";
+          Arch = " ";
+          Artix = " ";
+          CentOS = " ";
+          Debian = " ";
+          DragonFly = " ";
+          Emscripten = " ";
+          EndeavourOS = " ";
+          Fedora = " ";
+          FreeBSD = " ";
+          Garuda = "󰛓 ";
+          Gentoo = " ";
+          HardenedBSD = "󰞌 ";
+          Illumos = "󰈸 ";
+          Linux = " ";
+          Mabox = " ";
+          Macos = " ";
+          Manjaro = " ";
+          Mariner = " ";
+          MidnightBSD = " ";
+          Mint = " ";
+          NetBSD = " ";
+          NixOS = " ";
+          OpenBSD = "󰈺 ";
+          openSUSE = " ";
+          OracleLinux = "󰌷 ";
+          Pop = " ";
+          Raspbian = " ";
+          Redhat = " ";
+          RedHatEnterprise = " ";
+          Redox = "󰀘 ";
+          Solus = "󰠳 ";
+          SUSE = " ";
+          Ubuntu = " ";
+          Unknown = " ";
+          Windows = "󰍲 ";
+        };
+      };
+
+      package = {
+        symbol = "󰏗 ";
+      };
+
+      perl = {
+        symbol = " ";
+      };
+
+      php = {
+        symbol = " ";
+      };
+
+      pijul_channel = {
+        symbol = " ";
+      };
+
+      python = {
+        symbol = " ";
+      };
+
+      rlang = {
+        symbol = "󰟔 ";
+      };
+
+      ruby = {
+        symbol = " ";
+      };
+
+      rust = {
+        symbol = " ";
+      };
+
+      scala = {
+        symbol = " ";
+      };
+
+      swift = {
+        symbol = " ";
+      };
+
+      zig = {
+        symbol = " ";
       };
     };
   };
 }
+

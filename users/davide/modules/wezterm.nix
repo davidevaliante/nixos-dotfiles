@@ -4,8 +4,15 @@
   programs.wezterm = {
     enable = true;
     extraConfig = ''
-      local wezterm = require 'wezterm'
+      -- Pull in the wezterm API
+      local wezterm = require("wezterm")
+      local act = wezterm.action
+
+      -- This table will hold the configuration.
       local config = {}
+      -- local bg_color = "#171B20"
+      local bg_color = "#161616"
+
 
       -- In newer versions of wezterm, use the config_builder which will
       -- help provide clearer error messages
@@ -13,53 +20,105 @@
         config = wezterm.config_builder()
       end
 
-      -- Color scheme
-      config.color_scheme = 'Tokyo Night'
-
-      -- Font configuration
-      config.font = wezterm.font 'JetBrains Mono'
-      config.font_size = 12.0
-
-      -- Window configuration
-      config.window_background_opacity = 0.95
-      config.window_decorations = "RESIZE"
-      config.window_padding = {
-        left = 10,
-        right = 10,
-        top = 10,
-        bottom = 10,
-      }
-
-      -- Tab bar
-      config.enable_tab_bar = true
+      -- COLOR SCHEME
+      config.color_scheme = "Oxocarbon Dark (Gogh)"
+      -- config.color_scheme = "Dracula (base16)"
+      config.tab_bar_at_bottom = true
+      config.use_fancy_tab_bar = false
       config.hide_tab_bar_if_only_one_tab = true
-      config.tab_bar_at_bottom = false
-      config.use_fancy_tab_bar = true
 
-      -- Cursor
-      config.default_cursor_style = 'BlinkingBar'
-      config.cursor_blink_rate = 500
+      config.colors = {
+        -- bright green
+        cursor_bg = "#2dfa48",
 
-      -- Scrollback
-      config.scrollback_lines = 10000
+        -- bright pink
+        -- cursor_bg = "#fa2dfa",
 
-      -- Key bindings
-      config.keys = {
-        -- Split panes
-        { key = 'd', mods = 'CTRL|SHIFT', action = wezterm.action.SplitHorizontal { domain = 'CurrentPaneDomain' } },
-        { key = 'd', mods = 'CTRL', action = wezterm.action.SplitVertical { domain = 'CurrentPaneDomain' } },
-        -- Navigate panes
-        { key = 'h', mods = 'CTRL|SHIFT', action = wezterm.action.ActivatePaneDirection 'Left' },
-        { key = 'l', mods = 'CTRL|SHIFT', action = wezterm.action.ActivatePaneDirection 'Right' },
-        { key = 'k', mods = 'CTRL|SHIFT', action = wezterm.action.ActivatePaneDirection 'Up' },
-        { key = 'j', mods = 'CTRL|SHIFT', action = wezterm.action.ActivatePaneDirection 'Down' },
-        -- Resize panes
-        { key = 'h', mods = 'CTRL|SHIFT|ALT', action = wezterm.action.AdjustPaneSize { 'Left', 5 } },
-        { key = 'l', mods = 'CTRL|SHIFT|ALT', action = wezterm.action.AdjustPaneSize { 'Right', 5 } },
-        { key = 'k', mods = 'CTRL|SHIFT|ALT', action = wezterm.action.AdjustPaneSize { 'Up', 5 } },
-        { key = 'j', mods = 'CTRL|SHIFT|ALT', action = wezterm.action.AdjustPaneSize { 'Down', 5 } },
+        -- oxocarbon
+        -- cursor_bg = "#db2777",
+
+        -- padding fix
+        background = bg_color,
+        tab_bar = {
+          background = bg_color,
+          active_tab = {
+            bg_color = bg_color,
+            fg_color = '#5eb56a',
+            intensity = 'Bold',
+          },
+
+          inactive_tab = {
+            bg_color = bg_color,
+            fg_color = '#424242',
+          },
+
+          new_tab = {
+            bg_color = bg_color,
+            fg_color = '#d9a250',
+          },
+        },
       }
 
+      -- config.window_background_opacity = 0.95
+      -- config.win32_system_backdrop = 'Mica'
+      -- config.win32_system_backdrop = 'Tabbed'
+      -- config.win32_system_backdrop = 'Acrylic'
+
+      config.window_frame = {
+        active_titlebar_bg = "#ed1cab",
+        inactive_titlebar_bg = "#ed1cab",
+        font_size = 14.0,
+      }
+      -- On WSL it starts the term into ubuntu by default
+      config.default_domain = "WSL:Ubuntu-24.04"
+
+      -- FONTS RENDERING
+      -- font is available at https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/SourceCodePro.zip (Select the bold font)
+      config.font = wezterm.font_with_fallback({
+        { family = "0xProto Nerd Font Mono" },
+      })
+
+      -- KEYMAPS
+
+      -- GENERAL
+      config.default_cwd = "/home/davide"
+
+      -- disables the bell
+      config.audible_bell = "Disabled"
+      config.window_frame = {
+        font = wezterm.font({ family = "0xProto Nerd Font Mono", weight = "Bold" }),
+        active_titlebar_bg = "#171B20",
+        inactive_titlebar_bg = "#171B20"
+        -- active_titlebar_bg = "#8b5cf6",
+      }
+      config.skip_close_confirmation_for_processes_named = {
+        "bash",
+        "zsh",
+        "fish",
+      }
+      -- removes title bar
+      config.window_decorations = "RESIZE"
+      -- style
+      config.window_padding = {
+        left = "8px",
+        right = "8px",
+        top = 0,
+        bottom = 0,
+      }
+      -- config.window_background_opacity = 0.68
+
+      config.keys = {
+        -- paste from the clipboard
+        { key = "V", mods = "CTRL", action = act.PasteFrom("Clipboard") },
+
+        -- paste from the primary selection
+        { key = "V", mods = "CTRL", action = act.PasteFrom("PrimarySelection") },
+      }
+
+      -- enables kitty graphics
+      config.enable_kitty_graphics = true
+
+      -- and finally, return the configuration to wezterm
       return config
     '';
   };

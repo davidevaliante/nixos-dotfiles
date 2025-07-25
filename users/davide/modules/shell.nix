@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   programs.bash = {
@@ -11,85 +11,81 @@
     };
   };
 
-  programs.starship = {
+  programs.zsh = {
     enable = true;
-    settings = {
-      format = "$all$character";
-      character = {
-        success_symbol = "[➜](bold green)";
-        error_symbol = "[➜](bold red)";
-      };
-    };
-
     historySubstringSearch.enable = true;
 
-    initExtraFirst = /* bash */ ''
-      # Set up zinit
-      ZINIT_HOME="''${XDG_DATA_HOME:-''${HOME}/.local/share}/zinit/zinit.git"
+    initContent = lib.mkMerge [
+      # Early initialization (equivalent to initExtraFirst)
+      (lib.mkOrder 500 /* bash */ ''
+        # Set up zinit
+        ZINIT_HOME="''${XDG_DATA_HOME:-''${HOME}/.local/share}/zinit/zinit.git"
 
-      if [ ! -d "$ZINIT_HOME" ]; then
-        mkdir -p "$(dirname $ZINIT_HOME)"
-        ${pkgs.git}/bin/git clone https://github.com/zdharma-continuum/zinit "$ZINIT_HOME"
-      fi
+        if [ ! -d "$ZINIT_HOME" ]; then
+          mkdir -p "$(dirname $ZINIT_HOME)"
+          ${pkgs.git}/bin/git clone https://github.com/zdharma-continuum/zinit "$ZINIT_HOME"
+        fi
 
-      source "''${ZINIT_HOME}/zinit.zsh"
-    '';
+        source "''${ZINIT_HOME}/zinit.zsh"
+      '')
 
-    initExtra = /* bash */ ''
-      # Load zinit plugins
-      zinit light zsh-users/zsh-syntax-highlighting
-      zinit light zsh-users/zsh-autosuggestions
+      # General configuration (equivalent to initExtra)
+      (lib.mkOrder 1000 /* bash */ ''
+        # Load zinit plugins
+        zinit light zsh-users/zsh-syntax-highlighting
+        zinit light zsh-users/zsh-autosuggestions
 
-      # Additional history options
-      setopt hist_save_no_dups
+        # Additional history options
+        setopt hist_save_no_dups
 
-      # Completion configuration
-      zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+        # Completion configuration
+        zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 
-      # Custom functions
-      tofu-command () {
-        args=("$@")
-        slackUser="Davide"
-        slackToken="my-slacktoken"
-        channelID="C03T3NFSWHZ"
+        # Custom functions
+        tofu-command () {
+          args=("$@")
+          slackUser="Davide"
+          slackToken="my-slacktoken"
+          channelID="C03T3NFSWHZ"
 
-        curl -H "Content-type: application/json; charset=utf-8" -H "Authorization: Bearer $slackToken" "https://slack.com/api/chat.postMessage" -d "{\"channel\": \"$channelID\",\"text\": \":exclamation::exclamation::exclamation: $slackUser is running terraform :exclamation::exclamation::exclamation:\"}" > /dev/null 2>&1
+          curl -H "Content-type: application/json; charset=utf-8" -H "Authorization: Bearer $slackToken" "https://slack.com/api/chat.postMessage" -d "{\"channel\": \"$channelID\",\"text\": \":exclamation::exclamation::exclamation: $slackUser is running terraform :exclamation::exclamation::exclamation:\"}" > /dev/null 2>&1
 
-        "tofu" "''${args[@]}"
+          "tofu" "''${args[@]}"
 
-        curl -H "Content-type: application/json; charset=utf-8" -H "Authorization: Bearer $slackToken" "https://slack.com/api/chat.postMessage" -d "{\"channel\": \"$channelID\",\"text\": \":white_check_mark: $slackUser finished running terraform\"}" > /dev/null 2>&1
-      }
+          curl -H "Content-type: application/json; charset=utf-8" -H "Authorization: Bearer $slackToken" "https://slack.com/api/chat.postMessage" -d "{\"channel\": \"$channelID\",\"text\": \":white_check_mark: $slackUser finished running terraform\"}" > /dev/null 2>&1
+        }
 
-      function set-tab-title(){
-        wezterm.exe cli set-tab-title $1
-      }
+        function set-tab-title(){
+          wezterm.exe cli set-tab-title $1
+        }
 
-      function dirswitch(){
-        mkdir $1 && cd $1
-      }
+        function dirswitch(){
+          mkdir $1 && cd $1
+        }
 
-      # Source additional files
-      [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-      eval "$(${pkgs.zoxide}/bin/zoxide init zsh)"
+        # Source additional files
+        [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+        eval "$(${pkgs.zoxide}/bin/zoxide init zsh)"
 
-      # Bun completions
-      [ -s "/home/davide/.bun/_bun" ] && source "/home/davide/.bun/_bun"
+        # Bun completions
+        [ -s "/home/davide/.bun/_bun" ] && source "/home/davide/.bun/_bun"
 
-      # NVM
-      export NVM_DIR="$HOME/.nvm"
-      [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-      [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+        # NVM
+        export NVM_DIR="$HOME/.nvm"
+        [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+        [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
-      # Bash completion for terraform
-      autoload -U +X bashcompinit && bashcompinit
-      complete -o nospace -C ${pkgs.terraform}/bin/terraform terraform
+        # Bash completion for terraform
+        autoload -U +X bashcompinit && bashcompinit
+        complete -o nospace -C ${pkgs.terraform}/bin/terraform terraform
 
-      # Homebrew
-      eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+        # Homebrew
+        eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
-      # Source wezterm
-      source /home/davide/wezterm.sh
-    '';
+        # Source wezterm
+        source /home/davide/wezterm.sh
+      '')
+    ];
 
     shellAliases = {
       # Navigation
@@ -130,22 +126,22 @@
       SEED_DATA = "false";
     };
 
-    envExtra = ''
-      # PATH exports
-      export PATH="/opt/nvim-linux64/bin:$PATH"
-      export PATH="$HOME/bin:$PATH"
-      export PATH="/usr/local/go/bin:$PATH"
-      export PATH="/home/davide/.local/bin:$PATH"
-      export PATH="$PNPM_HOME:$PATH"
-      export PATH="$BUN_INSTALL/bin:$PATH"
-      export PATH="$HOME/go/bin:$PATH"
-      export PATH="$HOME/.local/bin:$PATH"
-      export PATH="$PATH:$(go env GOPATH)/bin"
-      export PATH="$PATH:/snap/bin"
-      export PATH="$HOME/.tofuenv/bin:$PATH"
-      export PATH="/usr/local/cuda-11.2/bin''${PATH:+:''${PATH}}"
-      export PATH="$PATH:/home/davide/.pulumi/bin"
-    '';
   };
+
+  home.sessionPath = [
+    "/opt/nvim-linux64/bin"
+    "$HOME/bin"
+    "/usr/local/go/bin"
+    "/home/davide/.local/bin"
+    "$PNPM_HOME"
+    "$BUN_INSTALL/bin"
+    "$HOME/go/bin"
+    "$HOME/.local/bin"
+    "$(go env GOPATH)/bin"
+    "/snap/bin"
+    "$HOME/.tofuenv/bin"
+    "/usr/local/cuda-11.2/bin"
+    "/home/davide/.pulumi/bin"
+  ];
 }
 
