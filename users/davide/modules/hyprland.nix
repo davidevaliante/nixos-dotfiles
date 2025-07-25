@@ -7,8 +7,8 @@
     settings = {
       # Monitor configuration with scaling
       monitor = [
-        # Adjust these based on your setup
-        ",preferred,auto,1.25"  # 1.25x scaling for high DPI displays
+        # Adjust these based on your setup - try 1.0 for normal scaling
+        ",preferred,auto,1.0"  # 1.0x scaling (normal size)
         # For specific monitors: "DP-1,1920x1080@60,0x0,1"
       ];
 
@@ -76,6 +76,13 @@
         force_default_wallpaper = 0;
         disable_hyprland_logo = true;
       };
+
+      # Startup applications
+      exec-once = [
+        "waybar"
+        "hyprpaper"
+        "dunst"
+      ];
 
       # Key bindings
       "$mainMod" = "SUPER";
