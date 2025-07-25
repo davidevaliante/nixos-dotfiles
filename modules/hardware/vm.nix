@@ -9,7 +9,6 @@
     enable32Bit = true;
     extraPackages = with pkgs; [
       mesa
-      mesa.drivers
     ];
   };
 
