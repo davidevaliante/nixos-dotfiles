@@ -3,7 +3,7 @@
 {
   wayland.windowManager.hyprland = {
     enable = true;
-    
+
     settings = {
       # Monitor configuration with scaling
       monitor = [
@@ -84,10 +84,10 @@
 
       # Key bindings
       "$mainMod" = "SUPER";
-      
+
       bind = [
         # Launch applications
-        "$mainMod, RETURN, exec, wezterm"
+        "$mainMod, RETURN, exec, kitty"
         "$mainMod, Q, killactive,"
         "$mainMod, M, exit,"
         "$mainMod, E, exec, nautilus"
@@ -198,3 +198,4 @@
     };
   };
 }
+

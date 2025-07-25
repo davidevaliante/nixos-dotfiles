@@ -33,8 +33,8 @@
   # Essential packages for Hyprland
   environment.systemPackages = with pkgs; [
     # Terminal emulators
-    wezterm
-    foot # Lightweight fallback terminal
+    kitty
+    # wezterm
 
     # Notifications
     dunst
